@@ -1,9 +1,9 @@
 <?php
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
 // No direct access
@@ -15,12 +15,14 @@ use \Joomla\CMS\Uri\Uri;
 use \Joomla\CMS\Router\Route;
 use \Joomla\CMS\Language\Text;
 use \Joomla\CMS\Layout\LayoutHelper;
-use \Joomla\CMS\Session\Session;
-use \Joomla\CMS\User\UserFactoryInterface;
 
 HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.multiselect');
 HTMLHelper::_('formbehavior.chosen', 'select');
+$wa = $this->document->getWebAssetManager();
+$wa->useStyle('com_mantenimiento.list');
+$wa->useScript('table.columns')
+    ->useScript('multiselect');
 
 $user       = Factory::getApplication()->getIdentity();
 $userId     = $user->get('id');
@@ -31,10 +33,10 @@ $canEdit    = $user->authorise('core.edit', 'com_mantenimiento') && file_exists(
 $canCheckin = $user->authorise('core.manage', 'com_mantenimiento');
 $canChange  = $user->authorise('core.edit.state', 'com_mantenimiento');
 $canDelete  = $user->authorise('core.delete', 'com_mantenimiento');
+//$canCreate  = true;
+//$canEdit    = true;
+//$canDelete  = true;
 
-// Import CSS
-$wa = $this->document->getWebAssetManager();
-$wa->useStyle('com_mantenimiento.list');
 ?>
 
 <form action="<?php echo htmlspecialchars(Uri::getInstance()->toString()); ?>" method="post"
@@ -44,60 +46,31 @@ $wa->useStyle('com_mantenimiento.list');
 		<table class="table table-striped" id="estacionList">
 			<thead>
 			<tr>
-				
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_ID', 'a.id', $listDirn, $listOrder); ?>
-					</th>
-
 					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_NOMBRE', 'a.nombre', $listDirn, $listOrder); ?>
 					</th>
 
 					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_IND_SINOPTICO', 'a.ind_sinoptico', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_IND_CLIMATOLOGICO', 'a.ind_climatologico', $listDirn, $listOrder); ?>
 					</th>
-
 					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_TIPO_ESTACION', 'a.tipo_estacion', $listDirn, $listOrder); ?>
 					</th>
-
 					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_VARIABLES', 'a.variables', $listDirn, $listOrder); ?>
 					</th>
-
 					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_TIPO_MANT', 'a.tipo_mant', $listDirn, $listOrder); ?>
 					</th>
-
 					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_PROVINCIA', 'a.provincia', $listDirn, $listOrder); ?>
 					</th>
+                    <?php if ($canEdit || $canDelete): ?>
 
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_LATITUD', 'a.latitud', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_LONGITUD', 'a.longitud', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_ALTITUD', 'a.altitud', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_MANTENIMIENTO_ESTACIONES_GEOGRAFICA', 'a.geografica', $listDirn, $listOrder); ?>
-					</th>
-
-						<?php if ($canEdit || $canDelete): ?>
 					<th class="center">
-						<?php echo Text::_('COM_MANTENIMIENTO_ESTACIONES_ACTIONS'); ?>
+						<?php echo Text::_('Editar/Borrar'); ?>
 					</th>
-					<?php endif; ?>
+                    <?php endif; ?>
 
 			</tr>
 			</thead>
@@ -112,30 +85,15 @@ $wa->useStyle('com_mantenimiento.list');
 			</tfoot>
 			<tbody>
 			<?php foreach ($this->items as $i => $item) : ?>
-				<?php $canEdit = $user->authorise('core.edit', 'com_mantenimiento'); ?>
-				<?php if (!$canEdit && $user->authorise('core.edit.own', 'com_mantenimiento')): ?>
-				<?php $canEdit = Factory::getApplication()->getIdentity()->id == $item->created_by; ?>
-				<?php endif; ?>
 
 				<tr class="row<?php echo $i % 2; ?>">
-					
-					<td>
-						<?php echo $item->id; ?>
+				    <td>
+					<a href="<?php echo Route::_('index.php?option=com_mantenimiento&view=mantenimientos&est=' . $item->ind_climatologico, false, 2); ?>" class="btn btn-mini" type="button" title="Ver mantenimientos"><?php echo $item->nombre; ?></a>
 					</td>
+
 					<td>
-						<?php $canCheckin = Factory::getApplication()->getIdentity()->authorise('core.manage', 'com_mantenimiento.' . $item->id) || $item->checked_out == Factory::getApplication()->getIdentity()->id; ?>
-						<?php if($canCheckin && $item->checked_out > 0) : ?>
-							<a href="<?php echo Route::_('index.php?option=com_mantenimiento&task=estacion.checkin&id=' . $item->id .'&'. Session::getFormToken() .'=1'); ?>">
-							<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'estacion.', false); ?></a>
-						<?php endif; ?>
-						<a href="<?php echo Route::_('index.php?option=com_mantenimiento&view=estacion&id='.(int) $item->id); ?>">
-							<?php echo $this->escape($item->nombre); ?></a>
-					</td>
-					<td>
-						<?php echo $item->ind_sinoptico; ?>
-					</td>
-					<td>
-						<?php echo $item->ind_climatologico; ?>
+						<a href="<?php echo Route::_('index.php?option=com_mantenimiento&view=estacion&id='.(int) $item->id); ?>" class="btn btn-mini" type="button" title="Ver todos los datos">
+						<?php echo $item->ind_climatologico; ?></a>
 					</td>
 					<td>
 						<?php echo $item->tipo_estacion; ?>
@@ -144,45 +102,37 @@ $wa->useStyle('com_mantenimiento.list');
 						<?php echo $item->variables; ?>
 					</td>
 					<td>
-						<?php echo $item->tipo_mant; ?>
+						<?php
+                          if($item->tipo_mant ==1){
+                            echo "Mensual";
+                          }elseif($item->tipo_mant ==2){
+                            echo "Trimestral";
+                          }elseif($item->tipo_mant ==3){
+                            echo "Semestral";
+                          }
+                         ?>
 					</td>
 					<td>
 						<?php echo $item->provincia; ?>
 					</td>
-					<td>
-						<?php echo $item->latitud; ?>
-					</td>
-					<td>
-						<?php echo $item->longitud; ?>
-					</td>
-					<td>
-						<?php echo $item->altitud; ?>
-					</td>
-					<td>
-						<?php echo $item->geografica; ?>
-					</td>
-					<?php if ($canEdit || $canDelete): ?>
-						<td class="center">
-							<?php if ($canEdit): ?>
-								<a href="<?php echo Route::_('index.php?option=com_mantenimiento&task=estacion.edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
-							<?php endif; ?>
-							<?php if ($canDelete): ?>
-								<a href="<?php echo Route::_('index.php?option=com_mantenimiento&task=estacionform.remove&id=' . $item->id, false, 2); ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></a>
-							<?php endif; ?>
-						</td>
-					<?php endif; ?>
-
+                    <?php if ($canEdit || $canDelete): ?>
+                    <td class="center">
+                        <a href="<?php echo Route::_('index.php?option=com_mantenimiento&task=estacionform.edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
+                        <a href="<?php echo Route::_('index.php?option=com_mantenimiento&task=estacionform.remove&id=' . $item->id, false, 2); ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></a>
+                    </td>
+                    <?php endif; ?>
 				</tr>
 			<?php endforeach; ?>
+
 			</tbody>
 		</table>
 	</div>
-	<?php if ($canCreate) : ?>
+    <?php if ($canCreate) : ?>
 		<a href="<?php echo Route::_('index.php?option=com_mantenimiento&task=estacionform.edit&id=0', false, 0); ?>"
 		   class="btn btn-success btn-small"><i
 				class="icon-plus"></i>
 			<?php echo Text::_('COM_MANTENIMIENTO_ADD_ITEM'); ?></a>
-	<?php endif; ?>
+        <?php endif; ?>
 
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="boxchecked" value="0"/>
@@ -192,7 +142,7 @@ $wa->useStyle('com_mantenimiento.list');
 </form>
 
 <?php
-	if($canDelete) {
+
 		$wa->addInlineScript("
 			jQuery(document).ready(function () {
 				jQuery('.delete-button').click(deleteItem);
@@ -200,10 +150,10 @@ $wa->useStyle('com_mantenimiento.list');
 
 			function deleteItem() {
 
-				if (!confirm(\"" . Text::_('COM_MANTENIMIENTO_DELETE_MESSAGE') . "\")) {
+				if (!confirm(\"" . Text::_('¿Seguro que desea borrar la estación?') . "\")) {
 					return false;
 				}
 			}
 		", [], [], ["jquery"]);
-	}
+
 ?>

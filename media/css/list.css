@@ -1,7 +1,16 @@
 /**
- * @version     CVS: 1.0.0
- * @package     com_mantenimiento
- * @copyright   2022 Andres Segovia
- * @license     Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
- * @author      Andres Segovia <angarita@mundo-r.com>
+ * @version    CVS: 1.0.0
+ * @package    Com_Mantenimiento
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2022 Angel Garitagotia
+ * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
+ #estacionList a {
+    color: var(--template-link-color);
+    text-decoration: none;
+ }
+
+#mantenimientoList a {
+    color: var(--template-link-color);
+    text-decoration: none;
+ }

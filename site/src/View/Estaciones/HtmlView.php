@@ -1,26 +1,21 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
 
 namespace Aemet\Component\Mantenimiento\Site\View\Estaciones;
-// No direct access
+
 defined('_JEXEC') or die;
 
 use \Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use \Joomla\CMS\Factory;
 use \Joomla\CMS\Language\Text;
 
-/**
- * View class for a list of Mantenimiento.
- *
- * @since  1.0.0
- */
 class HtmlView extends BaseHtmlView
 {
 	protected $items;
@@ -31,15 +26,7 @@ class HtmlView extends BaseHtmlView
 
 	protected $params;
 
-	/**
-	 * Display the view
-	 *
-	 * @param   string  $tpl  Template name
-	 *
-	 * @return void
-	 *
-	 * @throws Exception
-	 */
+
 	public function display($tpl = null)
 	{
 		$app = Factory::getApplication();
@@ -51,7 +38,6 @@ class HtmlView extends BaseHtmlView
 		$this->filterForm = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
 
-		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
 			throw new \Exception(implode("\n", $errors));
@@ -61,21 +47,12 @@ class HtmlView extends BaseHtmlView
 		parent::display($tpl);
 	}
 
-	/**
-	 * Prepares the document
-	 *
-	 * @return void
-	 *
-	 * @throws Exception
-	 */
 	protected function _prepareDocument()
 	{
 		$app   = Factory::getApplication();
 		$menus = $app->getMenu();
 		$title = null;
 
-		// Because the application sets a default page title,
-		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
 
 		if ($menu)
@@ -119,16 +96,8 @@ class HtmlView extends BaseHtmlView
 			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}
 
-		
-	}
 
-	/**
-	 * Check if state is set
-	 *
-	 * @param   mixed  $state  State
-	 *
-	 * @return bool
-	 */
+	}
 	public function getState($state)
 	{
 		return isset($this->state->{$state}) ? $this->state->{$state} : false;

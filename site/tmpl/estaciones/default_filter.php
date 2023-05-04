@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
 
@@ -16,10 +16,8 @@ use \Joomla\CMS\Language\Text;
 
 $data = $displayData;
 
-// Receive overridable options
 $data['options'] = !empty($data['options']) ? $data['options'] : array();
 
-// Check if any filter field has been filled
 $filters       = false;
 $filtered      = false;
 $search_filter = false;
@@ -29,7 +27,6 @@ if (isset($data['view']->filterForm))
 	$filters = $data['view']->filterForm->getGroup('filter');
 }
 
-// Check if there are filters set.
 if ($filters !== false)
 {
 	$filterFields = array_keys($filters);
@@ -58,10 +55,9 @@ if ($filters !== false)
 
 $options = $data['options'];
 
-// Set some basic options
 $customOptions = array(
 	'filtersHidden'       => isset($options['filtersHidden']) ? $options['filtersHidden'] : empty($data['view']->activeFilters) && !$filtered,
-	'defaultLimit'        => isset($options['defaultLimit']) ? $options['defaultLimit'] : Factory::getApplication()->get('list_limit', 20),
+	'defaultLimit'        => isset($options['defaultLimit']) ? $options['defaultLimit'] : Factory::getApplication()->get('list_limit', 10),
 	'searchFieldSelector' => '#filter_search',
 	'orderFieldSelector'  => '#list_fullordering'
 );
@@ -70,7 +66,6 @@ $data['options'] = array_unique(array_merge($customOptions, $data['options']));
 
 $formSelector = !empty($data['options']['formSelector']) ? $data['options']['formSelector'] : '#adminForm';
 
-// Load search tools
 HTMLHelper::_('searchtools.form', $formSelector, $data['options']);
 ?>
 
@@ -101,9 +96,9 @@ HTMLHelper::_('searchtools.form', $formSelector, $data['options']);
 				</div>
 		</div>
 	</div>
-	<!-- Filters div -->
+
 	<div class="js-stools-container-filters hidden-phone clearfix" style="">
-		<?php // Load the form filters ?>
+
 		<?php if ($filters) : ?>
 			<?php foreach ($filters as $fieldName => $field) : ?>
 				<?php if ($fieldName != 'filter_search') : ?>

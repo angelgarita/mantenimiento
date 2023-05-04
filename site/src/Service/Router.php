@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
 
@@ -56,16 +56,29 @@ class Router extends RouterView
 		$params = Factory::getApplication()->getParams('com_mantenimiento');
 		$this->noIDs = (bool) $params->get('sef_ids');
 		$this->categoryFactory = $categoryFactory;
-		
-		
+
+
 			$estaciones = new RouterViewConfiguration('estaciones');
 			$this->registerView($estaciones);
-			$ccEstacion = new RouterViewConfiguration('estacion');
-			$ccEstacion->setKey('id')->setParent($estaciones);
-			$this->registerView($ccEstacion);
-			$estacionform = new RouterViewConfiguration('estacionform');
-			$estacionform->setKey('id');
-			$this->registerView($estacionform);
+            $consultamantenimientos = new RouterViewConfiguration('consultamantenimientos');
+			$this->registerView($consultamantenimientos);
+            $mantenimientos = new RouterViewConfiguration('mantenimientos');
+			$this->registerView($mantenimientos);
+			$estacion = new RouterViewConfiguration('estacion');
+			$estacion->setKey('id')->setParent($estacion);
+			$this->registerView($estacion);
+			$estacionesform = new RouterViewConfiguration('estacionesform');
+			$estacionesform->setKey('id');
+			$this->registerView($estacionesform);
+            $mapa = new RouterViewConfiguration('mapa');
+            $mapa->setKey('id');
+            $this->registerView($mapa);
+            $mapasin = new RouterViewConfiguration('mapasin');
+            $mapasin->setKey('id');
+            $this->registerView($mapasin);
+            $kml = new RouterViewConfiguration('kml');
+            $kml->setKey('id');
+            $this->registerView($kml);
 
 		parent::__construct($app, $menu);
 
@@ -75,56 +88,56 @@ class Router extends RouterView
 	}
 
 
-	
+
 		/**
-		 * Method to get the segment(s) for an estacion
+		 * Method to get the segment(s) for an estaciones
 		 *
-		 * @param   string  $id     ID of the estacion to retrieve the segments for
+		 * @param   string  $id     ID of the estaciones to retrieve the segments for
 		 * @param   array   $query  The request that is built right now
 		 *
 		 * @return  array|string  The segments of this item
 		 */
-		public function getEstacionSegment($id, $query)
+		public function getEstacionesSegment($id, $query)
 		{
 			return array((int) $id => $id);
 		}
 			/**
-			 * Method to get the segment(s) for an estacionform
+			 * Method to get the segment(s) for an estacionesform
 			 *
-			 * @param   string  $id     ID of the estacionform to retrieve the segments for
+			 * @param   string  $id     ID of the estacionesform to retrieve the segments for
 			 * @param   array   $query  The request that is built right now
 			 *
 			 * @return  array|string  The segments of this item
 			 */
-			public function getEstacionformSegment($id, $query)
+			public function getEstacionesformSegment($id, $query)
 			{
-				return $this->getEstacionSegment($id, $query);
+				return $this->getEstacionesSegment($id, $query);
 			}
 
-	
+
 		/**
-		 * Method to get the segment(s) for an estacion
+		 * Method to get the segment(s) for an estaciones
 		 *
-		 * @param   string  $segment  Segment of the estacion to retrieve the ID for
+		 * @param   string  $segment  Segment of the estaciones to retrieve the ID for
 		 * @param   array   $query    The request that is parsed right now
 		 *
 		 * @return  mixed   The id of this item or false
 		 */
-		public function getEstacionId($segment, $query)
+		public function getEstacionesId($segment, $query)
 		{
 			return (int) $segment;
 		}
 			/**
-			 * Method to get the segment(s) for an estacionform
+			 * Method to get the segment(s) for an estacionesform
 			 *
-			 * @param   string  $segment  Segment of the estacionform to retrieve the ID for
+			 * @param   string  $segment  Segment of the estacionesform to retrieve the ID for
 			 * @param   array   $query    The request that is parsed right now
 			 *
 			 * @return  mixed   The id of this item or false
 			 */
-			public function getEstacionformId($segment, $query)
+			public function getEstacionesformId($segment, $query)
 			{
-				return $this->getEstacionId($segment, $query);
+				return $this->getEstacionesId($segment, $query);
 			}
 
 	/**

@@ -2,8 +2,8 @@
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
 
@@ -67,9 +67,9 @@ class EstacionTable extends Table implements VersionableTableInterface, Taggable
 	public function __construct(DatabaseDriver $db)
 	{
 		$this->typeAlias = 'com_mantenimiento.estacion';
-		parent::__construct('#__estacion', 'id', $db);
+		parent::__construct('#__estaciones', 'id', $db);
 		$this->setColumnAlias('published', 'state');
-		
+
 	}
 
 	/**
@@ -101,7 +101,7 @@ class EstacionTable extends Table implements VersionableTableInterface, Taggable
 		$date = Factory::getDate();
 		$task = Factory::getApplication()->input->get('task');
 		$user = Factory::getApplication()->getIdentity();
-		
+
 
 		if (isset($array['params']) && is_array($array['params']))
 		{
@@ -204,13 +204,13 @@ class EstacionTable extends Table implements VersionableTableInterface, Taggable
 		{
 			$this->ordering = self::getNextOrder();
 		}
-		
+
 		// Check if ind_climatologico is unique
 		if (!$this->isUnique('ind_climatologico'))
 		{
 			throw new \Exception('Your <b>ind_climatologico</b> item "<b>' . $this->ind_climatologico . '</b>" already exists');
 		}
-		
+
 
 		return parent::check();
 	}
@@ -261,7 +261,7 @@ class EstacionTable extends Table implements VersionableTableInterface, Taggable
 
 	//XXX_CUSTOM_TABLE_FUNCTION
 
-	
+
     /**
      * Delete a record by id
      *
@@ -273,7 +273,7 @@ class EstacionTable extends Table implements VersionableTableInterface, Taggable
     {
         $this->load($pk);
         $result = parent::delete($pk);
-        
+
         return $result;
     }
 }

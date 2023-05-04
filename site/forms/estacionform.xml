@@ -1,18 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form addfieldprefix="Aemet\Component\Mantenimiento\Site\Field">
   <fieldset>
-    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
-    <field name="nombre" required="true" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_NOMBRE" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_NOMBRE" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_NOMBRE"/>
-    <field name="ind_sinoptico" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_IND_SINOPTICO" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_IND_SINOPTICO" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_IND_SINOPTICO"/>
-    <field name="ind_climatologico" required="true" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_IND_CLIMATOLOGICO" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_IND_CLIMATOLOGICO" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_IND_CLIMATOLOGICO"/>
-    <field name="tipo_estacion" required="true" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_TIPO_ESTACION" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_TIPO_ESTACION" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_TIPO_ESTACION"/>
-    <field name="variables" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_VARIABLES" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_VARIABLES" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_VARIABLES"/>
-    <field name="tipo_mant" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_TIPO_MANT" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_TIPO_MANT" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_TIPO_MANT"/>
-    <field name="provincia" required="true" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_PROVINCIA" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_PROVINCIA" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_PROVINCIA"/>
-    <field name="latitud" required="true" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_LATITUD" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_LATITUD" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_LATITUD"/>
-    <field name="longitud" required="true" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_LONGITUD" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_LONGITUD" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_LONGITUD"/>
-    <field name="altitud" required="true" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_ALTITUD" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_ALTITUD" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_ALTITUD"/>
-    <field name="geografica" label="COM_MANTENIMIENTO_FORM_LBL_ESTACION_GEOGRAFICA" description="COM_MANTENIMIENTO_FORM_DESC_ESTACION_GEOGRAFICA" hint="COM_MANTENIMIENTO_FORM_LBL_ESTACION_GEOGRAFICA"/>
-    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+        <field
+            name="id"
+            type="hidden"
+            readonly="true"
+            class="readonly"
+            default="0"
+            description="JGLOBAL_FIELD_ID_DESC"
+        />
+        <field name="nombre" label="Nombre" type="text" required="true" />
+        <field name="ind_sinoptico" label="Indicativo synóptico" type="text" required="false" />
+        <field name="ind_climatologico" label="Indicativo climatológico" type="text" required="true" />
+        <field name="tipo_estacion" type="list" default="" required="true" label="Tipo" description="">
+            <option value="">Escoja tipo de estación</option>
+            <option value="THIES">THIES</option>
+            <option value="VAISALA">VAISALA</option>
+            <option value="ESOS">ESOS</option>
+            <option value="SIMAS">SIMAS</option>
+            <option value="SEAC">SEAC</option>
+            <option value="RADAR">RADAR</option>
+            <option value="SONDEO">SONDEO</option>
+        </field>
+        <field name="variables" type="checkboxes" label="Variables" description="" hint="">
+            <option value="T">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_T</option>
+            <option value="LL">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_LL</option>
+            <option value="H">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_H</option>
+            <option value="V">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_V</option>
+            <option value="P">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_P</option>
+            <option value="R">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_R</option>
+            <option value="I">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_I</option>
+            <option value="RADAR">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_RADAR</option>
+            <option value="SONDEO">COM_MANTENIMIENTO_MANTENIMIENTOS_VARIABLES_OPTION_SONDEO</option>
+        </field>
+        <!--<field name="variables" type="list" default="" required="true" label="Variables (T: temperatura; H: humedad; V: viento; LL: precipitación; P: presión; R: radiación; I: insolación)" description="">
+            <option value="">Escoja sensores de la estación</option>
+            <option value="T H LL">T H LL</option>
+            <option value="T H V LL">T H V LL</option>
+            <option value="T H V LL P">T H V LL P</option>
+            <option value="T H V LL P R">T H V LL P R</option>
+            <option value="T H V LL P R I">T H V LL P R I</option>
+            <option value="RADAR">RADAR</option>
+            <option value="SONDEO">SONDEO</option>
+        </field>-->
+        <field name="tipo_mant" type="list" default="" required="true" label="Tipo" description="">
+            <option value="">Escoja tiempo mantenimiento preventivo</option>
+            <option value="1">Mensual</option>
+            <option value="2">Trimestral</option>
+            <option value="3">Semestral</option>
+        </field>
+        <field name="provincia" label="Provincia" type="text" required="true" />
+        <field name="latitud" label="Latitud" type="text" required="true" />
+        <field name="longitud" label="Longitud" type="text" required="true" />
+        <field name="altitud" label="Altitud" type="text" required="false" />
+        <field name="geografica" label="Sistema de referencia geográfica" default='ETRS-89' type="text" required="false" />
   </fieldset>
 </form>

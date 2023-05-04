@@ -1,17 +1,15 @@
 <?php
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
-// No direct access
 defined('_JEXEC') or die;
 
 use \Joomla\CMS\HTML\HTMLHelper;
 use \Joomla\CMS\Factory;
-use \Joomla\CMS\Uri\Uri;
 use \Joomla\CMS\Router\Route;
 use \Joomla\CMS\Language\Text;
 use \Aemet\Component\Mantenimiento\Site\Helper\MantenimientoHelper;
@@ -21,13 +19,12 @@ $wa->useScript('keepalive')
 	->useScript('form.validate');
 HTMLHelper::_('bootstrap.tooltip');
 
-// Load admin language file
 $lang = Factory::getLanguage();
 $lang->load('com_mantenimiento', JPATH_SITE);
 
 $user    = Factory::getApplication()->getIdentity();
-$canEdit = MantenimientoHelper::canUserEdit($this->item, $user);
-
+//$canEdit = MantenimientoHelper::canUserEdit($this->item, $user);
+$canEdit="true";
 
 ?>
 
@@ -38,19 +35,19 @@ $canEdit = MantenimientoHelper::canUserEdit($this->item, $user);
 		</h3>
 	<?php else : ?>
 		<?php if (!empty($this->item->id)): ?>
-			<h1><?php echo Text::sprintf('COM_MANTENIMIENTO_EDIT_ITEM_TITLE', $this->item->id); ?></h1>
+			<h1><?php echo Text::sprintf('Modificar datos estación', $this->item->id); ?></h1>
 		<?php else: ?>
-			<h1><?php echo Text::_('COM_MANTENIMIENTO_ADD_ITEM_TITLE'); ?></h1>
+			<h1><?php echo Text::_('Añadir estación'); ?></h1>
 		<?php endif; ?>
 
 		<form id="form-estacion"
 			  action="<?php echo Route::_('index.php?option=com_mantenimiento&task=estacionform.save'); ?>"
 			  method="post" class="form-validate form-horizontal" enctype="multipart/form-data">
-			
+
 	<input type="hidden" name="jform[id]" value="<?php echo isset($this->item->id) ? $this->item->id : ''; ?>" />
 
-	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'estacion')); ?>
-	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'estacion', Text::_('COM_MANTENIMIENTO_TAB_ESTACION', true)); ?>
+	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'lugar')); ?>
+	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'lugar', Text::_('ESTACIÓN', true)); ?>
 	<?php echo $this->form->renderField('nombre'); ?>
 
 	<?php echo $this->form->renderField('ind_sinoptico'); ?>

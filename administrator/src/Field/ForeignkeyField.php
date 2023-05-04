@@ -3,8 +3,8 @@
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
 
@@ -92,8 +92,8 @@ class ForeignKeyField extends ListField
 
 		// Flag to identify if the fk_value hides the trashed items
 		$this->hideTrashed = (int) $this->getAttribute('hide_trashed', 0);
-		
-		// Flag to identify if the fk_value hides the unpublished items	
+
+		// Flag to identify if the fk_value hides the unpublished items
 		$this->hideUnpublished = (int) $this->getAttribute('hide_unpublished', 0);
 
 		// Flag to identify if the fk_value hides the published items
@@ -133,7 +133,7 @@ class ForeignKeyField extends ListField
 			{
 				$fk_value .= $db->quoteName($field) . ', \'' . $this->separator . '\', ';
 			}
-			
+
 			$fk_value = substr($fk_value, 0, -(strlen($this->separator) + 6));
 			$fk_value .= ') AS ' . $db->quoteName($this->value_field);
 		}
@@ -181,7 +181,7 @@ class ForeignKeyField extends ListField
 			$query->where($this->condition);
 		}
 
-		
+
 
 		return $query;
 	}

@@ -2,8 +2,8 @@
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Mantenimiento
- * @author     Andres Segovia <angarita@mundo-r.com>
- * @copyright  2022 Andres Segovia
+ * @author     Angel Garitagotia <agaritagotiac@aemet.es>
+ * @copyright  2023 Angel Garitagotia
  * @license    Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt
  */
 
@@ -47,17 +47,5 @@ class MantenimientoComponent extends MVCComponent implements RouterServiceInterf
 		$this->getRegistry()->register('mantenimiento', new MANTENIMIENTO($db));
 	}
 
-	
-/**
- * Returns the table for the count items functions for the given section.
-	 *
-	 * @param   string    The section
-	 *
-	 * * @return  string|null
-	 *
-	 * @since   4.0.0
-	 */
-	    protected function getTableNameForSection(string $section = null)            
-	{
-	}
+
 }
