@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<form>
+    <fieldset name="pidemantenimientos">
+        <field
+            name="ind_estacion"
+            type="sql"
+            label="Estación"
+            query="SELECT ind_climatologico, nombre FROM #__estaciones ORDER BY nombre ASC"
+            key_field="ind_climatologico"
+            value_field="nombre"
+        />
+        <field
+            name="fecha"
+            type="calendar"
+            default=""
+            label="Fecha"
+            description="Fecha a partir de la cual queremos recuperar los  mantenimientos. Todos si queda en blanco"
+            required="false"
+            filter="user_utc"
+	        showtime="false"
+            todaybutton="false"
+            filltable="false"
+            translateformat="true"
+        />
+    </fieldset>
+</form>

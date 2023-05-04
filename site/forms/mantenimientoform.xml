@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form addfieldprefix="Aemet\Component\Mantenimiento\Site\Field">
+  <fieldset>
+    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
+    <!--<field name="ind_estacion" maxlength="5" filter="safehtml" type="text" required="true" label="COM_MANTENIMIENTO_FORM_LBL_MANTENIMIENTO_IND_ESTACION" description="COM_MANTENIMIENTO_FORM_DESC_MANTENIMIENTO_IND_ESTACION" hint="COM_MANTENIMIENTO_FORM_LBL_MANTENIMIENTO_IND_ESTACION"/>-->
+    <field
+            name="ind_estacion"
+            type="sql"
+            label="Estación"
+            query="SELECT ind_climatologico, nombre FROM #__estaciones ORDER BY nombre ASC"
+            key_field="ind_climatologico"
+            value_field="nombre"
+            required="true"
+            >
+            <option value="">Escoja una estación</option>
+    </field>
+    <field name="fecha"  type="calendar" translateformat="true" class="inputbox" filter="safehtml" required="true" label="Fecha" description="Fecha del mantenimiento" hint="Fecha del mantenimiento"/>
+    <!--<field name="tecnicos" type="text" filter="safehtml" label="Técnicos" description="Técnicos que realizaron el mantenimiento"/>-->
+    <field name="tecnicos" maxlength="100" filter="safehtml" type="text" required="true" message="Debe indicar los técnicos que realizaron el mantenimiento" label="Técnicos" description="Técnicos que realizaron el mantenimiento" hint="Técnicos"/>
+    <field name="actuacion" maxlength="200" filter="safehtml" type="text" required="true" message="Debe especificar operaciones realizadas" label="Actuación" description="Labores realizadas durante el mantenimiento" hint="Labores realizadas durante el mantenimiento"/>
+    <field name="comentarios" maxlength="200" filter="safehtml" type="text" label="Comentarios" description="Observaciones y comentarios " hint="Observaciones y comentarios"/>
+    <!--<field name="adendas" type="editor" label="Test Field" description="" width="300" filter="safehtml" />-->
+    <field name="estado" type="list" required="true" label="Estado en el que queda la estación" description="Estado en el que queda la estación después de la actuación" hint="COM_MANTENIMIENTO_FORM_LBL_MANTENIMIENTO_ESTADO">
+      <option value="">Estado final</option>
+      <option value="V">Correcto</option>
+      <option value="A">Con fallos</option>
+      <option value="R">Sin funcionar</option>
+    </field>
+    <field name="ultimo" default="1" filter="safehtml" type="hidden" label="COM_MANTENIMIENTO_FORM_LBL_MANTENIMIENTO_ULTIMO" description="COM_MANTENIMIENTO_FORM_DESC_MANTENIMIENTO_ULTIMO" hint="COM_MANTENIMIENTO_FORM_LBL_MANTENIMIENTO_ULTIMO"/>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+
+  </fieldset>
+</form>

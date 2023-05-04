@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form addfieldprefix="Aemet\Component\Mantenimiento\Administrator\Field">
+  <fieldset>
+    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
+    <field name="zoom" default="8" required="true" label="COM_MANTENIMIENTO_FORM_LBL_MAPA_ZOOM" description="COM_MANTENIMIENTO_FORM_DESC_MAPA_ZOOM" hint="COM_MANTENIMIENTO_FORM_LBL_MAPA_ZOOM"/>
+    <field name="latitud" type="number" step="0.01" required="true" label="COM_MANTENIMIENTO_FORM_LBL_MAPA_LATITUD" description="COM_MANTENIMIENTO_FORM_DESC_MAPA_LATITUD" hint="COM_MANTENIMIENTO_FORM_LBL_MAPA_LATITUD"/>
+    <field name="longitud" type="number" step="0.01" required="true" label="COM_MANTENIMIENTO_FORM_LBL_MAPA_LONGITUD" description="COM_MANTENIMIENTO_FORM_DESC_MAPA_LONGITUD" hint="COM_MANTENIMIENTO_FORM_LBL_MAPA_LONGITUD"/>
+    <field name="ancho" default="800" required="true" label="COM_MANTENIMIENTO_FORM_LBL_MAPA_ANCHO" description="COM_MANTENIMIENTO_FORM_DESC_MAPA_ANCHO" hint="COM_MANTENIMIENTO_FORM_LBL_MAPA_ANCHO"/>
+    <field name="alto" default="800" required="true" label="COM_MANTENIMIENTO_FORM_LBL_MAPA_ALTO" description="COM_MANTENIMIENTO_FORM_DESC_MAPA_ALTO" hint="COM_MANTENIMIENTO_FORM_LBL_MAPA_ALTO"/>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+  </fieldset>
+</form>

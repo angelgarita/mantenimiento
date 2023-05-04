@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Listado de mantenimientos" option="View">
+        <message>
+                        <![CDATA[Listado de los últimos mantenimientos de todas las estaciones]]>
+        </message>
+	</layout>
+
+</metadata>

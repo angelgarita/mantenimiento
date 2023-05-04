@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Histórico Mantenimiento">
+		<message>
+			<![CDATA[Consulta de Mantenimientos por estación y fecha]]>
+		</message>
+	</layout>
+</metadata>
