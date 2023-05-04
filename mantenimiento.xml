@@ -9,7 +9,6 @@
     <version>1.0.0</version>
     <description>Herramienta para la gestión y visualización de mantenimientos y estaciones</description>
     <namespace path="src">Aemet\Component\Mantenimiento</namespace>
-
     <install>
         <sql>
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
