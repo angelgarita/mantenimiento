@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="4.0" method="upgrade">
+    <name>com_mantenimiento</name>
+    <creationDate>2022-12-27</creationDate>
+    <copyright>2023 Angel Garitagotia</copyright>
+    <license>Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt</license>
+    <author>Angel Garitagotia</author>
+    <authorEmail>agaritagotiac@aemet.es</authorEmail>
+    <version>1.0.0</version>
+    <description>Herramienta para la gestión y visualización de mantenimientos y estaciones</description>
+    <namespace path="src">Aemet\Component\Mantenimiento</namespace>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates</schemapath>
+        </schemas>
+    </update>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <files folder="site">
+        <folder>src</folder>
+		<folder>forms</folder>
+        <folder>tmpl</folder>
+    </files>
+    <media destination="com_mantenimiento" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+        <filename>joomla.asset.json</filename>
+        <filename>rRojo.png</filename>
+        <filename>verde1.png</filename>
+        <filename>amarillo1.png</filename>
+        <filename>rAmarillo.png</filename>
+        <filename>rojo1.png</filename>
+		<filename>google_earth.png</filename>
+    </media>
+
+    <languages folder="site/languages">
+			<language tag="en-GB">en-GB/com_mantenimiento.ini</language>
+			<language tag="es-ES">es-ES/com_mantenimiento.ini</language>
+    </languages>
+    <administration>
+        <menu>COM_MANTENIMIENTO</menu>
+        <submenu>
+
+			<menu link="option=com_mantenimiento&amp;view=mapas" view="mapas" alt="Mantenimiento/Mapas">COM_MANTENIMIENTO_TITLE_MAPAS</menu>
+
+        </submenu>
+        <files folder="administrator">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>forms</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>services</folder>
+            <folder>presets</folder>
+            <folder>sql</folder>
+        </files>
+        <languages folder="administrator/languages">
+
+			<language tag="en-GB">en-GB/com_mantenimiento.ini</language>
+			<language tag="en-GB">en-GB/com_mantenimiento.sys.ini</language>
+			<language tag="es-ES">es-ES/com_mantenimiento.ini</language>
+			<language tag="es-ES">es-ES/com_mantenimiento.sys.ini</language>
+        </languages>
+    </administration>
+    <config>
+        <fields name="params">
+            <fieldset name="component">
+                <field name="save_history" default="0" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>
