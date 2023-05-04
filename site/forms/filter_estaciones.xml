@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="filter">
+        <field name="search" type="text" hint="COM_MANTENIMIENTO_SEARCH_FILTER_SUBMIT"
+               label="COM_USERS_FILTER_SEARCH_DESC"
+               class="js-stools-search-string" />
+
+        
+
+    </fields>
+    <fields name="list">
+
+        <field name="fullordering"
+               type="list"
+               label="COM_MANTENIMIENTO_LIST_FULL_ORDERING"
+               description="COM_MANTENIMIENTO_LIST_FULL_ORDERING_DESC"
+               onchange="this.form.submit();"
+               default="a.id DESC"
+        >
+            <option value="">JGLOBAL_SORT_BY</option>
+            <option value="a.id ASC">COM_MANTENIMIENTO_ID_ASC</option><option value="a.id DESC">COM_MANTENIMIENTO_ID_DESC</option><option value="a.nombre ASC">COM_MANTENIMIENTO_NOMBRE_ASC</option><option value="a.nombre DESC">COM_MANTENIMIENTO_NOMBRE_DESC</option><option value="a.ind_sinoptico ASC">COM_MANTENIMIENTO_IND_SINOPTICO_ASC</option><option value="a.ind_sinoptico DESC">COM_MANTENIMIENTO_IND_SINOPTICO_DESC</option><option value="a.ind_climatologico ASC">COM_MANTENIMIENTO_IND_CLIMATOLOGICO_ASC</option><option value="a.ind_climatologico DESC">COM_MANTENIMIENTO_IND_CLIMATOLOGICO_DESC</option><option value="a.tipo_estacion ASC">COM_MANTENIMIENTO_TIPO_ESTACION_ASC</option><option value="a.tipo_estacion DESC">COM_MANTENIMIENTO_TIPO_ESTACION_DESC</option><option value="a.variables ASC">COM_MANTENIMIENTO_VARIABLES_ASC</option><option value="a.variables DESC">COM_MANTENIMIENTO_VARIABLES_DESC</option><option value="a.tipo_mant ASC">COM_MANTENIMIENTO_TIPO_MANT_ASC</option><option value="a.tipo_mant DESC">COM_MANTENIMIENTO_TIPO_MANT_DESC</option><option value="a.provincia ASC">COM_MANTENIMIENTO_PROVINCIA_ASC</option><option value="a.provincia DESC">COM_MANTENIMIENTO_PROVINCIA_DESC</option><option value="a.latitud ASC">COM_MANTENIMIENTO_LATITUD_ASC</option><option value="a.latitud DESC">COM_MANTENIMIENTO_LATITUD_DESC</option><option value="a.longitud ASC">COM_MANTENIMIENTO_LONGITUD_ASC</option><option value="a.longitud DESC">COM_MANTENIMIENTO_LONGITUD_DESC</option><option value="a.altitud ASC">COM_MANTENIMIENTO_ALTITUD_ASC</option><option value="a.altitud DESC">COM_MANTENIMIENTO_ALTITUD_DESC</option><option value="a.geografica ASC">COM_MANTENIMIENTO_GEOGRAFICA_ASC</option><option value="a.geografica DESC">COM_MANTENIMIENTO_GEOGRAFICA_DESC</option>
+
+        </field>
+
+       <field name="limit"
+               type="limitbox"
+               label="COM_MANTENIMIENTO_LIST_LIMIT"
+               description="COM_MANTENIMIENTO_LIST_LIMIT_DESC"
+               class="input-mini"
+               default="25"
+               onchange="this.form.submit();"
+        />
+
+    </fields>
+</form>

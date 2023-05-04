@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_mantenimiento",
+  "version": "CVS: 1.0.0",
+  "license": "Licencia Pública General GNU versión 2 o posterior. Consulte LICENSE.txt",
+  "assets": [
+    {
+      "name": "com_mantenimiento.admin",
+      "type": "style",
+      "uri": "com_mantenimiento/admin.css"
+    },
+    {
+      "name": "com_mantenimiento.admin",
+      "type": "script",
+      "uri": "com_mantenimiento/admin.js",
+      "dependencies": [
+        "jquery"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+        "name": "com_mantenimiento.list",
+        "type": "style",
+        "uri": "com_mantenimiento/list.css"
+    }
+  ]
+}
